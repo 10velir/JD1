@@ -18,6 +18,8 @@ public class ProductController implements Controller {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().setAttribute("products", productService.getAll());
+        /*String contextPath = req.getContextPath();
+        resp.sendRedirect(contextPath+ "/frontController?command=createOrder");*/
         req.getRequestDispatcher(MAIN_PAGE).forward(req, resp);
     }
 }

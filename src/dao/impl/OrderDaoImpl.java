@@ -19,9 +19,8 @@ import entities.Order;
 public class OrderDaoImpl extends AbstractDao implements OrderDao {
     private static volatile OrderDao INSTANCE = null;
 
-    private static final String saveQuery = "INSERT INTO `ORDER` (USER_ID, TOTAL, DATE) VALUES (?, ?, now())";
-    private static final String saveQueryWithPaid = "INSERT INTO `ORDER` (USER_ID, TOTAL, DATE, PAID) VALUES (?, ?, now(), ?)";
-    private static final String updateQuery = "UPDATE `ORDER` SET TOTAL=? WHERE ID=?";
+    private static final String saveQuery = "INSERT INTO `ORDER` (USER_ID, TOTAL, DATE, PAID) VALUES (?, ?, now(), ?)";
+    private static final String updateQuery = "UPDATE `ORDER` SET TOTAL=? AND PAID=? WHERE ID=?";
     private static final String getQuery = "SELECT ID, USER_ID FROM `ORDER` WHERE ID=?";
     private static final String getAllByUserQuery = "SELECT ID, USER_ID FROM `ORDER` WHERE USER_ID = ? ORDER BY ID DESC";
     private static final String deleteQuery = "DELETE FROM `ORDER` WHERE ID=?";
@@ -37,18 +36,7 @@ public class OrderDaoImpl extends AbstractDao implements OrderDao {
         psSave = prepareStatement(saveQuery, Statement.RETURN_GENERATED_KEYS);
         psSave.setLong(1, order.getUserId());
         psSave.setDouble(2, order.getTotal());
-        psSave.executeUpdate();
-        ResultSet rs = psSave.getGeneratedKeys();
-        if (rs.next()) {
-            order.setId(rs.getLong(1));
-        }
-        close(rs);
-        return order;
-    }
-    public Order saveWithPaid(Order order) throws SQLException{
-        psSave = prepareStatement(saveQueryWithPaid, Statement.RETURN_GENERATED_KEYS);
-        psSave.setLong(1, order.getUserId());
-        psSave.setDouble(2, order.getTotal());
+        psSave.setBoolean(3,order.isPaid());
         psSave.executeUpdate();
         ResultSet rs = psSave.getGeneratedKeys();
         if (rs.next()) {
@@ -77,7 +65,8 @@ public class OrderDaoImpl extends AbstractDao implements OrderDao {
     public void update(Order order) throws SQLException {
         psUpdate = prepareStatement(updateQuery);
         psUpdate.setLong(1, order.getId());
-        psUpdate.setDouble(2, order.getTotal());
+        psUpdate.setDouble(3, order.getTotal());
+        psUpdate.setBoolean(2, order.isPaid());
         psUpdate.executeUpdate();
     }
 

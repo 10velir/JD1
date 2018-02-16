@@ -32,17 +32,18 @@
                         <td class="col-md-1">${car.price}</td>
                         <td>
                             <form action="frontController?command=createOrder" method="post">
-                                <input type="hidden" name="productId" value="${car.id}"><td>
-                            <form action="frontController?command=createOrder" method="post">
+                                <input type="hidden" name="productId" value="${car.id}">
                                 <input type="submit" class="btn-success" name="submit" value="Арендовать">
+                            <%--<form action="frontController?command=createOrder" method="post">
+
 
                         <td class="col-md-1"><input id="${order.id}" class="btn-primary addProductBtn" type="datetime-local"
                                                     title="Добавить в корзину" /></td>
                         <td class="col-md-1"><input id="${order.id}" class="btn-primary addProductBtn" type="datetime-local"
                                                     title="Добавить в корзину" /></td>
-                        <td><input type="submit" class="btn-success" name="submit" value="Оплатить"></td>
+                        <td><input type="submit" class="btn-success" name="submit" value="Оплатить"></td>--%>
                         </form>
-
+                        </td>
                             <%--<td class="col-md-1"><input id="${car.id}" class="btn-primary addProductBtn" type="button" title="Добавить в корзину" value="+"/></td>
                         <td class="col-md-1"><input id="${car.id}" class="btn-primary reduceProductBtn" type="button" title="Удалить 1 из корзину" value="-"/></td>--%>
                     </div>

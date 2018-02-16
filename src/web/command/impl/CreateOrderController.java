@@ -21,13 +21,29 @@ public class CreateOrderController implements Controller {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = (User)req.getSession().getAttribute("user");
-        long productId = Long.parseLong(req.getParameter("productId"));
+        User user = (User) req.getSession().getAttribute("user");
+        long productId;
+        Order order;
+        if (!(req.getParameter("productId") == null)) {
+            productId = Long.parseLong(req.getParameter("productId"));
+            order = orderService.createOrder(user.getId(), productId, 0);
+        } else{
+            order = orderService.get(Long.parseLong(req.getParameter("orderId")));
+        }
+
         List<Order> orders = orderService.getByUserId(user.getId());
 
         req.setAttribute("orders", orders);
-        Order order = orderService.createOrder(user.getId(), productId, 0);
 
+
+        if (!(req.getParameter("paid") == null || req.getParameter("paid").isEmpty())) {
+            req.getSession().setAttribute("user", user);
+            order.setPaid(true);
+            orderService.update(order);
+            String contextPath = req.getContextPath();
+            resp.sendRedirect(contextPath + "/frontController?command=createOrder");
+            return;
+        }
         //req.setAttribute("order", order);
         RequestDispatcher dispatcher = req.getRequestDispatcher(MAIN_PAGE);
         dispatcher.forward(req, resp);
