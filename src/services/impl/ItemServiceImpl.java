@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
-import dao.ItemDao;
-import dao.impl.ItemDaoImpl;
+import dao.CarDao;
+import dao.impl.CarDaoImpl;
 import entities.Item;
 import services.ItemService;
 import services.ServiceException;
@@ -14,12 +14,12 @@ import services.ServiceException;
  * Created by yslabko on 07/03/2017.
  */
 public class ItemServiceImpl extends AbstractService implements ItemService {
-    private ItemDao itemDao = ItemDaoImpl.getInstance();
+    private CarDao carDao = CarDaoImpl.getInstance();
 
     @Override
     public Item save(Item item) {
         try {
-            item = itemDao.save(item);
+            item = carDao.save(item);
         } catch (SQLException e) {
             throw new ServiceException("Error creating Item" + item);
         }
@@ -29,7 +29,7 @@ public class ItemServiceImpl extends AbstractService implements ItemService {
     @Override
     public Item get(Serializable id) {
         try {
-            return itemDao.get(id);
+            return carDao.get(id);
         } catch (SQLException e) {
             throw new ServiceException("Error geting Item by id " + id);
         }
@@ -38,7 +38,7 @@ public class ItemServiceImpl extends AbstractService implements ItemService {
     @Override
     public void update(Item item) {
         try {
-            itemDao.update(item);
+            carDao.update(item);
         } catch (SQLException e) {
             throw new ServiceException("Error updating Item" + item);
         }
@@ -52,7 +52,7 @@ public class ItemServiceImpl extends AbstractService implements ItemService {
     @Override
     public List<Item> getByOrderId(long orderId) {
         try {
-            return itemDao.getByOrderId(orderId);
+            return carDao.getByOrderId(orderId);
         } catch (SQLException e) {
             throw new ServiceException("Error getting all items");
         }
