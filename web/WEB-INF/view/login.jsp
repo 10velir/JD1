@@ -10,10 +10,7 @@
         <input type="text" name="login" maxlength="30"/>
         <b><fmt:message bundle="${i18n}" key="login.password"/></b>
         <input type="password" name="password" maxlength="20"/><br/>
-        <button type="button">
 
-        </button>
-        <p class="help-block">qwwww</p>
         <input type="submit" value="<fmt:message bundle="${i18n}" key="login.submit"/>">
     </form>
 </div>
