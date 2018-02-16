@@ -18,4 +18,5 @@ public class Order {
     private long userId;
     private List<Item> items = new ArrayList<>();
     private double total;
+    private boolean paid;
 }

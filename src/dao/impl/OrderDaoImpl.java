@@ -20,6 +20,7 @@ public class OrderDaoImpl extends AbstractDao implements OrderDao {
     private static volatile OrderDao INSTANCE = null;
 
     private static final String saveQuery = "INSERT INTO `ORDER` (USER_ID, TOTAL, DATE) VALUES (?, ?, now())";
+    private static final String saveQueryWithPaid = "INSERT INTO `ORDER` (USER_ID, TOTAL, DATE, PAID) VALUES (?, ?, now(), ?)";
     private static final String updateQuery = "UPDATE `ORDER` SET TOTAL=? WHERE ID=?";
     private static final String getQuery = "SELECT ID, USER_ID FROM `ORDER` WHERE ID=?";
     private static final String getAllByUserQuery = "SELECT ID, USER_ID FROM `ORDER` WHERE USER_ID = ? ORDER BY ID DESC";
@@ -44,6 +45,19 @@ public class OrderDaoImpl extends AbstractDao implements OrderDao {
         close(rs);
         return order;
     }
+    public Order saveWithPaid(Order order) throws SQLException{
+        psSave = prepareStatement(saveQueryWithPaid, Statement.RETURN_GENERATED_KEYS);
+        psSave.setLong(1, order.getUserId());
+        psSave.setDouble(2, order.getTotal());
+        psSave.executeUpdate();
+        ResultSet rs = psSave.getGeneratedKeys();
+        if (rs.next()) {
+            order.setId(rs.getLong(1));
+        }
+        close(rs);
+        return order;
+    }
+
 
     @Override
     public Order get(Serializable id) throws SQLException {

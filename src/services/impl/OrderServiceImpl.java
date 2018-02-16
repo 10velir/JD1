@@ -102,6 +102,31 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
         }
     }
 
+    public void createOrder(long userId, long productId, int quantity, boolean paidStatus) {
+        Order order = new Order();
+        try {
+            startTransaction();
+            order.setUserId(userId);
+
+            Car car = productDao.get(productId);
+            if (quantity < 1) {
+                quantity = 1;
+            }
+            order.setTotal(car.getPrice() * quantity);
+            order.setPaid(paidStatus);
+            order = orderDao.save(order);
+
+            Item item = new Item(order.getId(), productId, quantity);
+            carDao.save(item);
+
+            commit();
+            //return order;
+        } catch (SQLException e) {
+            rollback();
+            throw new ServiceException("Error creating Order " + order, e);
+        }
+    }
+
     public static OrderService getInstance() {
         OrderService orderService = INSTANCE;
         if (orderService == null) {

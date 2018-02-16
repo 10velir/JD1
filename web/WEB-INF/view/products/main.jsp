@@ -4,8 +4,8 @@
     <c:if test="${not empty message}">INFO : ${message}</c:if> <br/>
 </div>
 <div>
-    <div class="container-fluid">
-        <div class="col-md-12">Товары</div>
+        <div class="container-fluid">
+        <div class="col-md-12">Машины</div>
         <table class="table">
             <tr>
                 <th class="col-md-4">Supplier</th>
@@ -14,7 +14,8 @@
                     <th class="col-md-1">Quantity</th>
                     <th class="col-md-1">Price</th>
                     <th class="col-md-1"></th>
-                    <th class="col-md-1"></th>
+                    <th class="col-md-1">С</th>
+                    <th class="col-md-1">По</th>
                 </div>
             </tr>
             <script>
@@ -29,8 +30,21 @@
                         <td class="col-md-4">${car.model}</td>
                         <td id="count${car.id}" class="col-md-1">0</td>
                         <td class="col-md-1">${car.price}</td>
-                        <td class="col-md-1"><input id="${car.id}" class="btn-primary addProductBtn" type="button" title="Добавить в корзину" value="+"/></td>
-                        <td class="col-md-1"><input id="${car.id}" class="btn-primary reduceProductBtn" type="button" title="Удалить 1 из корзину" value="-"/></td>
+                        <td>
+                            <form action="frontController?command=createOrder" method="post">
+                                <input type="hidden" name="productId" value="${car.id}"><td>
+                            <form action="frontController?command=createOrder" method="post">
+                                <input type="submit" class="btn-success" name="submit" value="Арендовать">
+
+                        <td class="col-md-1"><input id="${order.id}" class="btn-primary addProductBtn" type="datetime-local"
+                                                    title="Добавить в корзину" /></td>
+                        <td class="col-md-1"><input id="${order.id}" class="btn-primary addProductBtn" type="datetime-local"
+                                                    title="Добавить в корзину" /></td>
+                        <td><input type="submit" class="btn-success" name="submit" value="Оплатить"></td>
+                        </form>
+
+                            <%--<td class="col-md-1"><input id="${car.id}" class="btn-primary addProductBtn" type="button" title="Добавить в корзину" value="+"/></td>
+                        <td class="col-md-1"><input id="${car.id}" class="btn-primary reduceProductBtn" type="button" title="Удалить 1 из корзину" value="-"/></td>--%>
                     </div>
                 </tr>
             </c:forEach>

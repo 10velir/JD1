@@ -3,7 +3,7 @@
           version="2.0">
     <footer class="newFooter">
         <div class="footer">
-            &#169;Демопроект Юлия Auth basics
+            &#169;Created by Yauheni Lialevich
         </div>
     </footer>
 </jsp:root>

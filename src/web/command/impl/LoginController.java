@@ -23,21 +23,21 @@ public class LoginController implements Controller {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         if (login==null || password==null) {
-            resp.setHeader("errorMsg", "Invalid Login or Password");
+            resp.setHeader("errorMsg", "Invalid Login or Password!!!!!!");
             RequestDispatcher dispatcher = req.getRequestDispatcher(MAIN_PAGE);
             dispatcher.forward(req, resp);
             return;
         }
         User user = userService.getByLogin(login);
-        if (user != null && user.getPassword().equals(Encoder.encode(password))) {
-//        if (user != null && password.equals(user.getPassword())) {
+//        if (user != null && user.getPassword().equals(Encoder.encode(password))) {
+       if (user != null && password.equals(user.getPassword())) {
             req.getSession().setAttribute("user", user);
             String contextPath = req.getContextPath();
             resp.sendRedirect(contextPath+ "/frontController?command=orders");
             return;
         } else {
-            resp.setHeader("errorMsg", "Invalid Login or Password");
-            req.setAttribute("errorMsg", "Invalid Login or Password");
+            resp.setHeader("errorMsg", "Invalid Login or Password2");
+            req.setAttribute("errorMsg", "Invalid Login or Password3");
             RequestDispatcher dispatcher = req.getRequestDispatcher(MAIN_PAGE);
             dispatcher.forward(req, resp);
             return;

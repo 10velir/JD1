@@ -15,8 +15,8 @@ public enum ControllerType {
     LOGOUT("login.jsp", "Logout", "logout.title", new LogoutController()),
     ORDERS("orders/main.jsp", "Orders", "orders.title", new OrderController()),
     ADD_PRODUCTS_AJAX("", "addProduct", "", new AddToBasketController()),
-    PRODUCTS("products/main.jsp", "Products", "products.title", new ProductController());
-
+    PRODUCTS("products/main.jsp", "Products", "products.title", new ProductController()),
+    CREATE_ORDER("orders/createOrder.jsp", "createOrder", "createOrder.title", new CreateOrderController());
     private String pagePath;
     private String pageName;
     private String i18nKey;
