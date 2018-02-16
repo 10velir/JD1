@@ -12,7 +12,7 @@ import dao.impl.OrderDaoImpl;
 import dao.impl.ProductDaoImpl;
 import entities.Item;
 import entities.Order;
-import entities.Product;
+import entities.Car;
 import services.OrderService;
 import services.ServiceException;
 
@@ -35,11 +35,11 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
             startTransaction();
             order.setUserId(userId);
 
-            Product product = productDao.get(productId);
+            Car car = productDao.get(productId);
             if (quantity < 1) {
                 quantity = 1;
             }
-            order.setTotal(product.getPrice() * quantity);
+            order.setTotal(car.getPrice() * quantity);
             order = orderDao.save(order);
 
             Item item = new Item(order.getId(), productId, quantity);
@@ -89,8 +89,8 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
                 order.setItems(items);
                 double sum = 0;
                 for (Item item : items) {
-                    Product product = productDao.get(item.getProductId());
-                    sum += product.getPrice() * item.getQuantity();
+                    Car car = productDao.get(item.getProductId());
+                    sum += car.getPrice() * item.getQuantity();
                 }
                 commit();
                 order.setTotal(sum);

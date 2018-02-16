@@ -2,7 +2,7 @@ package services.impl;
 
 import dao.ProductDao;
 import dao.impl.ProductDaoImpl;
-import entities.Product;
+import entities.Car;
 import services.ProductService;
 import services.ServiceException;
 
@@ -18,7 +18,7 @@ public class ProductServiceImpl extends AbstractService implements ProductServic
     ProductDao productDao = ProductDaoImpl.getInstance();
 
     @Override
-    public Product getByModelAndSupplier(String model, String supplier) {
+    public Car getByModelAndSupplier(String model, String supplier) {
         try {
             return productDao.getByModelAndSupplier(model, supplier);
         } catch (SQLException e) {
@@ -27,10 +27,10 @@ public class ProductServiceImpl extends AbstractService implements ProductServic
     }
 
     @Override
-    public List<Product> getAll() {
+    public List<Car> getAll() {
         try {
             startTransaction();
-            List<Product> list = productDao.getAll();
+            List<Car> list = productDao.getAll();
             commit();
             return list;
         } catch (SQLException e) {

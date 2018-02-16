@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.ProductDao;
-import entities.Product;
+import entities.Car;
 
 /**
  * Class ProductDaoImpl
@@ -37,22 +37,22 @@ public class ProductDaoImpl extends AbstractDao implements ProductDao {
     }
 
     @Override
-    public Product save(Product product) throws SQLException {
+    public Car save(Car car) throws SQLException {
         psSave = prepareStatement(saveProductQuery, Statement.RETURN_GENERATED_KEYS);
-        psSave.setString(1, product.getSupplier());
-        psSave.setString(2, product.getModel());
-        psSave.setDouble(3, product.getPrice());
+        psSave.setString(1, car.getSupplier());
+        psSave.setString(2, car.getModel());
+        psSave.setDouble(3, car.getPrice());
         psSave.executeUpdate();
         ResultSet rs = psSave.getGeneratedKeys();
         if (rs.next()) {
-            product.setId(rs.getLong(1));
+            car.setId(rs.getLong(1));
         }
         close(rs);
-        return product;
+        return car;
     }
 
     @Override
-    public Product get(Serializable id) throws SQLException {
+    public Car get(Serializable id) throws SQLException {
         psGet = prepareStatement(getProductQuery);
         psGet.setLong(1, (long)id);
         psGet.executeQuery();
@@ -66,12 +66,12 @@ public class ProductDaoImpl extends AbstractDao implements ProductDao {
     }
 
     @Override
-    public void update(Product product) throws SQLException {
+    public void update(Car car) throws SQLException {
         psUpdate = prepareStatement(updateProductQuery);
-        psUpdate.setLong(4, product.getId());
-        psUpdate.setString(1, product.getSupplier());
-        psUpdate.setString(2, product.getModel());
-        psUpdate.setDouble(3, product.getPrice());
+        psUpdate.setLong(4, car.getId());
+        psUpdate.setString(1, car.getSupplier());
+        psUpdate.setString(2, car.getModel());
+        psUpdate.setDouble(3, car.getPrice());
         psUpdate.executeUpdate();
     }
 
@@ -83,18 +83,18 @@ public class ProductDaoImpl extends AbstractDao implements ProductDao {
     }
 
     @Override
-    public Product getByModelAndSupplier(String model, String supplier) throws SQLException {
+    public Car getByModelAndSupplier(String model, String supplier) throws SQLException {
         psGetByModelAndSupplier = prepareStatement(getByModelAndSupplierQuery);
         psGetByModelAndSupplier.setString(1, model);
         psGetByModelAndSupplier.setString(2, supplier);
         psGetByModelAndSupplier.execute();
         ResultSet rs = psGetByModelAndSupplier.getResultSet();
         while (rs.next()) {
-            Product product = new Product();
-            product.setId(rs.getLong(1));
-            product.setSupplier(rs.getString(2));
-            product.setModel(rs.getString(3));
-            product.setPrice(rs.getDouble(4));
+            Car car = new Car();
+            car.setId(rs.getLong(1));
+            car.setSupplier(rs.getString(2));
+            car.setModel(rs.getString(3));
+            car.setPrice(rs.getDouble(4));
         }
         close(rs);
 
@@ -102,11 +102,11 @@ public class ProductDaoImpl extends AbstractDao implements ProductDao {
     }
 
     @Override
-    public List<Product> getAll() throws SQLException {
+    public List<Car> getAll() throws SQLException {
         psGetAll = prepareStatement(getAllProductQuery);
         psGetAll.execute();
         ResultSet rs = psGetAll.getResultSet();
-        List<Product> list = new ArrayList<>();
+        List<Car> list = new ArrayList<>();
         while (rs.next()) {
             list.add(populateProduct(rs));
         }
@@ -114,13 +114,13 @@ public class ProductDaoImpl extends AbstractDao implements ProductDao {
         return list;
     }
 
-    private Product populateProduct(ResultSet rs) throws SQLException {
-        Product product = new Product();
-        product.setId(rs.getLong(1));
-        product.setSupplier(rs.getString(2));
-        product.setModel(rs.getString(3));
-        product.setPrice(rs.getDouble(4));
-        return product;
+    private Car populateProduct(ResultSet rs) throws SQLException {
+        Car car = new Car();
+        car.setId(rs.getLong(1));
+        car.setSupplier(rs.getString(2));
+        car.setModel(rs.getString(3));
+        car.setPrice(rs.getDouble(4));
+        return car;
     }
 
     public static ProductDao getInstance() {
