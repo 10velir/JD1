@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
-import dao.CarDao;
+import dao.ItemDao;
 import dao.OrderDao;
 import dao.ProductDao;
-import dao.impl.CarDaoImpl;
+import dao.impl.ItemDaoImpl;
 import dao.impl.OrderDaoImpl;
 import dao.impl.ProductDaoImpl;
 import entities.Item;
@@ -26,7 +26,7 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
 
     private OrderDao orderDao = OrderDaoImpl.getInstance();
     private ProductDao productDao = ProductDaoImpl.getInstance();
-    private CarDao carDao = CarDaoImpl.getInstance();
+    private ItemDao itemDao = ItemDaoImpl.getInstance();
 
     @Override
     public Order createOrder(long userId, long productId, int quantity) {
@@ -43,7 +43,7 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
             order = orderDao.save(order);
 
             Item item = new Item(order.getId(), productId, quantity);
-            carDao.save(item);
+            itemDao.save(item);
             commit();
             return order;
         } catch (SQLException e) {
@@ -85,7 +85,7 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
             startTransaction();
             List<Order> orders = orderDao.getByUserId(userId);
             for (Order order : orders) {
-                List<Item> items = carDao.getByOrderId(order.getId());
+                List<Item> items = itemDao.getByOrderId(order.getId());
                 order.setItems(items);
                 double sum = 0;
                 for (Item item : items) {

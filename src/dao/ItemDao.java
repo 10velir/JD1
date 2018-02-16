@@ -6,10 +6,10 @@ import java.util.List;
 import entities.Item;
 
 /**
- * Class CarDao
+ * Class ItemDao
  *
  * Created by yslabko on 07/02/2017.
  */
-public interface CarDao extends DAO<Item>{
+public interface ItemDao extends DAO<Item>{
     List<Item> getByOrderId(long orderId) throws SQLException;
 }

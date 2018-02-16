@@ -8,16 +8,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.CarDao;
+import dao.ItemDao;
 import entities.Item;
 
 /**
- * Class CarDaoImpl
+ * Class ItemDaoImpl
  *
  * Created by yslabko on 07/02/2017.
  */
-public class CarDaoImpl extends AbstractDao implements CarDao {
-    private static volatile CarDao INSTANCE = null;
+public class ItemDaoImpl extends AbstractDao implements ItemDao {
+    private static volatile ItemDao INSTANCE = null;
 
     private static final String saveItemQuery = "INSERT INTO ITEM (ORDER_ID, PRODUCT_ID, QUANTITY, DISCOUNT) VALUES (?, ?, ?, ?)";
     private static final String updateItemQuery = "UPDATE ITEM SET QUANTITY=?, DISCOUNT=? WHERE ITEM_ID=?";
@@ -31,21 +31,21 @@ public class CarDaoImpl extends AbstractDao implements CarDao {
     private PreparedStatement psGetAll;
     private PreparedStatement psDelete;
 
-    private CarDaoImpl() {
+    private ItemDaoImpl() {
     }
 
-    public static CarDao getInstance() {
-        CarDao carDao = INSTANCE;
-        if (carDao == null) {
-            synchronized (CarDaoImpl.class) {
-                carDao = INSTANCE;
-                if (carDao == null) {
-                    INSTANCE = carDao = new CarDaoImpl();
+    public static ItemDao getInstance() {
+        ItemDao itemDao = INSTANCE;
+        if (itemDao == null) {
+            synchronized (ItemDaoImpl.class) {
+                itemDao = INSTANCE;
+                if (itemDao == null) {
+                    INSTANCE = itemDao = new ItemDaoImpl();
                 }
             }
         }
 
-        return carDao;
+        return itemDao;
     }
 
     @Override
