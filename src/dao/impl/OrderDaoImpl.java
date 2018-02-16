@@ -99,7 +99,7 @@ public class OrderDaoImpl extends AbstractDao implements OrderDao {
     public static OrderDao getInstance() {
         OrderDao itemDao = INSTANCE;
         if (itemDao == null) {
-            synchronized (ItemDaoImpl.class) {
+            synchronized (CarDaoImpl.class) {
                 itemDao = INSTANCE;
                 if (itemDao == null) {
                     INSTANCE = itemDao = new OrderDaoImpl();
