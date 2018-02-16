@@ -61,6 +61,7 @@ public class ItemDaoImpl extends AbstractDao implements ItemDao {
             item.setId(rs.getLong(1));
         }
         close(rs);
+        System.out.println();
         return item;
     }
 
