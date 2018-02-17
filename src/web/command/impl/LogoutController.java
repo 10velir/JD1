@@ -14,6 +14,7 @@ public class LogoutController implements Controller {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().invalidate();
-        req.getServletContext().getRequestDispatcher(MAIN_PAGE).forward(req, resp);
+        String contextPath = req.getContextPath();
+        resp.sendRedirect(contextPath+ "/frontController?command=login");
     }
 }

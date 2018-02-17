@@ -36,8 +36,8 @@ public class LoginController implements Controller {
             resp.sendRedirect(contextPath+ "/frontController?command=orders");
             return;
         } else {
-            resp.setHeader("errorMsg", "Invalid Login or Password2");
-            req.setAttribute("errorMsg", "Invalid Login or Password3");
+            resp.setHeader("errorMsg", "Invalid Login or Password");
+            req.setAttribute("errorMsg", "Invalid Login or Password");
             RequestDispatcher dispatcher = req.getRequestDispatcher(MAIN_PAGE);
             dispatcher.forward(req, resp);
             return;

@@ -14,6 +14,7 @@ public enum ControllerType {
     LOGIN("login.jsp", "Login", "login.title", new LoginController()),
     LOGOUT("login.jsp", "Logout", "logout.title", new LogoutController()),
     ORDERS("orders/main.jsp", "Orders", "orders.title", new OrderController()),
+    ORDERS_FOR_ADMIN("orders/main.jsp", "Orders", "orders.title", new OrderController()),
     ADD_PRODUCTS_AJAX("", "addProduct", "", new AddToBasketController()),
     PRODUCTS("products/main.jsp", "Products", "products.title", new ProductController()),
     CREATE_ORDER("orders/createOrder.jsp", "createOrder", "createOrder.title", new CreateOrderController());

@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by yslabko on 08/17/2017.
  */
-public class CreateOrderController implements Controller {
+public class    CreateOrderController implements Controller {
     private OrderService orderService = OrderServiceImpl.getInstance();
 
     @Override

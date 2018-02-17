@@ -5,8 +5,7 @@
 </div>
 <div>
         <div class="container-fluid">
-        <div class="col-md-12">Машины</div>
-        <table class="table">
+        <table class="table table-hover">
             <tr>
                 <th class="col-md-4">Supplier</th>
                 <div class="col-md-8">
@@ -14,8 +13,6 @@
                     <th class="col-md-1">Quantity</th>
                     <th class="col-md-1">Price</th>
                     <th class="col-md-1"></th>
-                    <th class="col-md-1">С</th>
-                    <th class="col-md-1">По</th>
                 </div>
             </tr>
             <script>

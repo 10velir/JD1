@@ -1,5 +1,4 @@
 ###  Lecture 24  ###
-DROP SCHEMA shop;
 CREATE DATABASE IF NOT EXISTS shop;
 use shop;
 

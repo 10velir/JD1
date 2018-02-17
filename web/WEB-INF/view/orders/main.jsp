@@ -1,20 +1,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<TABLE>
+<table class="table table-hover">
     <tr>
-        <th>№</th>
-        <th>Order Id</th>
-        <th>User id</th>
-        <th>Sum</th>
+        <th class="col-md-2">№</th>
+        <th class="col-md-2">Order id</th>
+        <th class="col-md-2">User id</th>
+        <th class="col-md-2">Sum</th>
     </tr>
 
     <c:forEach var="order" items="${orders}" varStatus="status">
-        <tr>
-            <td>${status.index + 1}</td>
-            <td>${order.id}</td>
-            <td>${order.userId}</td>
-            <td>${order.total}</td>
+        <tr class="info">
+            <td class="col-md-2">${status.index + 1}</td>
+            <td class="col-md-2">${order.id}</td>
+            <td class="col-md-2">${order.userId}</td>
+            <td class="col-md-2">${order.total}</td>
         </tr>
     </c:forEach>
-</TABLE>
+</table>
