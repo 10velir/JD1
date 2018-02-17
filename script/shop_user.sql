@@ -1,0 +1,2 @@
+UPDATE shop.user SET NAME = 'Yulij', LOGIN = 'Yulij', PASSWORD = 'Pass!', BIRTHDAY = null, STATUS = 'ACTIVE', ROLE = 'USER' WHERE USER_ID = 1;
+UPDATE shop.user SET NAME = 'Denis', LOGIN = 'Denis', PASSWORD = '123', BIRTHDAY = null, STATUS = 'ACTIVE', ROLE = 'USER' WHERE USER_ID = 2;
