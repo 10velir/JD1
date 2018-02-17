@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by yslabko on 08/17/2017.
@@ -24,11 +25,16 @@ public class CreateOrderController implements Controller {
         User user = (User) req.getSession().getAttribute("user");
         long productId;
         Order order;
-        if (!(req.getParameter("productId") == null)) {
+        if ((req.getParameter("productId") != null)) {
             productId = Long.parseLong(req.getParameter("productId"));
             order = orderService.createOrder(user.getId(), productId, 0);
         } else{
-            order = orderService.get(Long.parseLong(req.getParameter("orderId")));
+            Optional<Order> first = orderService.getByUserId(user.getId())
+                    .stream()
+                    .filter(order1 -> order1.getId() == Long.parseLong(req.getParameter("orderId")))
+                    .findFirst();
+            order=null;
+            req.getParameter("order");//orderService.get(Long.parseLong(req.getParameter("orderId")));
         }
 
         List<Order> orders = orderService.getByUserId(user.getId());
