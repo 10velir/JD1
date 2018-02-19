@@ -15,6 +15,12 @@
             <td class="col-md-2">${order.id}</td>
             <td class="col-md-2">${order.userId}</td>
             <td class="col-md-2">${order.total}</td>
+            <td>
+                <form action="frontController?command=deleteOrder" method="post">
+                    <input type="hidden" name="orderId" value="${order.id}">
+                    <input type="submit" class="btn-danger" name="submit" value="Удалить">
+                </form>
+            </td>
         </tr>
     </c:forEach>
 </table>

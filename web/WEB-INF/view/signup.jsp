@@ -28,7 +28,7 @@
             <input type="text" name="login">
             <input type="password" name="password">
             <input type="text" name="name">
-            <input type="submit" name="submit" value="sing up">
+            <input class="btn btn-success"type="submit" name="submit" value="sing up">
         </form>
         <%--<input type="submit" class="btn btn-primary col-md-6" value="<fmt:message bundle="${i18n}" key="login.signup"/>">--%>
     </form>
