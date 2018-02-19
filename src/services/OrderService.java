@@ -16,6 +16,7 @@ public interface OrderService {
     Order createOrder(long userId, long productId, int quantity);
     Order get(Serializable id);
     void update(Order order);
+    void update(boolean paidStatus, Serializable id);
     int delete(Serializable id);
     List<Order> getAllOrder();
 

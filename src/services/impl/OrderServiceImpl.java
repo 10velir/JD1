@@ -71,6 +71,15 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
     }
 
     @Override
+    public void update(boolean paidStatus, Serializable id) {
+        try {
+            orderDao.update(paidStatus, id);
+        } catch (SQLException e) {
+            throw new ServiceException("smth wrong");
+        }
+    }
+
+    @Override
     public int delete(Serializable id) {
         try {
             return orderDao.delete(id);

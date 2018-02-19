@@ -23,8 +23,11 @@ public class    CreateOrderController implements Controller {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = (User) req.getSession().getAttribute("user");
+
         long productId;
+
         Order order;
+
         if ((req.getParameter("productId") != null)) {
             productId = Long.parseLong(req.getParameter("productId"));
             order = orderService.createOrder(user.getId(), productId, 0);
@@ -41,11 +44,9 @@ public class    CreateOrderController implements Controller {
 
         req.setAttribute("orders", orders);
 
-
         if (!(req.getParameter("paid") == null || req.getParameter("paid").isEmpty())) {
             req.getSession().setAttribute("user", user);
-            order.setPaid(true);
-            orderService.update(order);
+            orderService.update(true, user.getId());
             String contextPath = req.getContextPath();
             resp.sendRedirect(contextPath + "/frontController?command=createOrder");
             return;

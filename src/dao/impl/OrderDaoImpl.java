@@ -78,6 +78,15 @@ public class OrderDaoImpl extends AbstractDao implements OrderDao {
         psUpdate.executeUpdate();
     }
 
+
+    @Override
+    public void update(boolean paidStatus, Serializable id) throws SQLException {
+        psUpdate = prepareStatement("UPDATE 'ORDER' SET PAID=? WHERE ID=?");
+        psUpdate.setBoolean(1,paidStatus);
+        psUpdate.setLong(2, (long) id);
+        psUpdate.executeUpdate();
+    }
+
     @Override
     public int delete(Serializable id) throws SQLException {
         psDelete = prepareStatement(deleteQuery);
