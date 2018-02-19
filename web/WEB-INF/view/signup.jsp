@@ -22,6 +22,14 @@
             <div class="col-md-4"></div>
             <input type="submit" class="btn btn-success col-md-4" value="<fmt:message bundle="${i18n}" key="login.submit"/>">
         </div>
+
+        <%--РАСПАРИСЬ НАДО ЭТУ ФОРМУ--%>
+        <form action="frontController?command=signup" method="post">
+            <input type="text" name="login">
+            <input type="password" name="password">
+            <input type="text" name="name">
+            <input type="submit" name="submit" value="sing up">
+        </form>
         <%--<input type="submit" class="btn btn-primary col-md-6" value="<fmt:message bundle="${i18n}" key="login.signup"/>">--%>
     </form>
 </div>

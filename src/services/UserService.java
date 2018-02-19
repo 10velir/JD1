@@ -10,4 +10,5 @@ import entities.User;
 public interface UserService {
 
     User getByLogin(String login);
+    User createUser(User user);
 }

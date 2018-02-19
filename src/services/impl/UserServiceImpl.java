@@ -1,12 +1,12 @@
 package services.impl;
 
-import java.sql.SQLException;
-
 import dao.UserDao;
 import dao.impl.UserDaoImpl;
 import entities.User;
 import services.ServiceException;
 import services.UserService;
+
+import java.sql.SQLException;
 
 /**
  * Class UserServiceImpl
@@ -24,6 +24,18 @@ public class UserServiceImpl extends AbstractService implements UserService {
         } catch (SQLException e) {
             throw new ServiceException("Error getting User by login" + login);
         }
+    }
+
+    @Override
+    public User createUser(User user) {
+
+        try {
+            user = userDao.createUser(user);
+        } catch (SQLException e) {
+            throw new ServiceException("smth wrong");
+        }
+
+        return user;
     }
 
     public static UserService getInstance() {

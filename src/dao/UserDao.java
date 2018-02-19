@@ -11,4 +11,5 @@ import entities.User;
  */
 public interface UserDao extends DAO<User> {
     User getByLogin(String login) throws SQLException;
+    User createUser(User user) throws SQLException;
 }

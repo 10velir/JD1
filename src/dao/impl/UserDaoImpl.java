@@ -17,7 +17,22 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
     private static volatile UserDao INSTANCE = null;
 
     private static final String getUser = "SELECT * FROM USER WHERE LOGIN=?";
+    private static final String createUser = "INSERT INTO USER (LOGIN, NAME, PASSWORD, STATUS, ROLE) VALUES (?, ?, ?, ?, ?)";
     private PreparedStatement psGetByLogin;
+    private PreparedStatement psCreateUser;
+
+    @Override
+    public User createUser(User user) throws SQLException {
+        psCreateUser = prepareStatement(createUser);
+        psCreateUser.setString(1,user.getLogin());
+        psCreateUser.setString(2,user.getName());
+        psCreateUser.setString(3,user.getPassword());
+        psCreateUser.setString(4,"ACTIVE");
+        psCreateUser.setString(5,"USER");
+        psCreateUser.executeUpdate();
+        user.setId(getByLogin(user.getLogin()).getId());
+        return user;
+    }
 
     @Override
     public User getByLogin(String login) throws SQLException {
