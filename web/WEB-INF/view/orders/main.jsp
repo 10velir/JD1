@@ -7,10 +7,10 @@
         <th class="col-md-2">Order id</th>
         <th class="col-md-2">User id</th>
         <th class="col-md-2">Sum</th>
+        <th class="col-md-2">Delete</th>
     </tr>
-
     <c:forEach var="order" items="${orders}" varStatus="status">
-        <tr class="info">
+        <tr class="info" >
             <td class="col-md-2">${status.index + 1}</td>
             <td class="col-md-2">${order.id}</td>
             <td class="col-md-2">${order.userId}</td>

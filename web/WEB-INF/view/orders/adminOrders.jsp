@@ -30,47 +30,25 @@
                     <br>
                 <td class="col-md-4">id car: ${item.productId}</td>
                 <td>
-                    <form action="frontController?command=adminOrders" method="post">
-                        <input type="text" name="comment">
-                        <input type="submit" name="disapprove" value="disapprove"/>
-                    </form>
+                    <div>
+                        <form action="frontController?command=adminOrders" method="post">
+                            <input type="text" name="comment">
+                            <input class="btn btn-danger col-md-6" type="submit" name="disapprove" value="disapprove"/>
+                        </form>
+                        <form action="frontController?command=adminOrders" method="post">
+                            <input class="btn btn-success col-md-6" type="submit" name="approve" value="approve">
+                        </form>
+                    </div>
                 </td>
                 <td>
-                    <form action="frontController?command=adminOrders" method="post">
-                        <input type="submit" name="approve" value="approve">
-                    </form>
+
                 </td>
                 </c:forEach>
                 </td>
                 </c:forEach>
 
             </tr>
-            <%--<c:forEach var="car" items="${products}" varStatus="status">
-                <tr class="info">
-                    <td class="col-md-4">${car.supplier}</td>
-                    <div class="col-md-8">
-                        <td class="col-md-4">${car.model}</td>
-                        <td id="count${car.id}" class="col-md-1">0</td>
-                        <td class="col-md-1">${car.price}</td>
-                        <td>
-                            <form action="frontController?command=createOrder" method="post">
-                                <input type="hidden" name="productId" value="${car.id}">
-                                <input type="submit" class="btn-success" name="submit" value="Арендовать">--%>
-            <%--<form action="frontController?command=createOrder" method="post">
 
-
-        <td class="col-md-1"><input id="${order.id}" class="btn-primary addProductBtn" type="datetime-local"
-                                    title="Добавить в корзину" /></td>
-        <td class="col-md-1"><input id="${order.id}" class="btn-primary addProductBtn" type="datetime-local"
-                                    title="Добавить в корзину" /></td>
-        <td><input type="submit" class="btn-success" name="submit" value="Оплатить"></td>--%>
-            <%--  </form>
-          </td>--%>
-            <%--<td class="col-md-1"><input id="${car.id}" class="btn-primary addProductBtn" type="button" title="Добавить в корзину" value="+"/></td>
-        <td class="col-md-1"><input id="${car.id}" class="btn-primary reduceProductBtn" type="button" title="Удалить 1 из корзину" value="-"/></td>--%>
-            <%--</div>
-        </tr>
-    </c:forEach>--%>
         </table>
     </div>
 
