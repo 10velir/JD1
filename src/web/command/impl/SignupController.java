@@ -44,10 +44,14 @@ public class SignupController implements Controller {
                 resp.sendRedirect(contextPath + "/frontController?command=products");
                 return;
             }
-            resp.setHeader("errorMsg", "This login is already exist");
+            User persistUser = userService.createUser(user);
+            req.getSession().setAttribute("user", userService.getByLogin(persistUser.getLogin()));
+            resp.sendRedirect(contextPath + "/frontController?command=products");
+            return;
+            /*resp.setHeader("errorMsg", "This login is already exist");
             RequestDispatcher dispatcher = req.getRequestDispatcher(page);
             dispatcher.forward(req, resp);
-            return;
+            return;*/
 
         }
 
