@@ -13,14 +13,15 @@
         <input class="form-control" type="password" name="password" maxlength="30" placeholder="<fmt:message bundle="${i18n}" key="login.placeholderpass"/>">
         <div class="col-md-12">
             <div class="col-md-4"></div>
-            <a name="submit" class="navbar-brand" href=""></a>
+
+            <form action="frontController?command=createOrder" method="post">
+                <a name="submit" class="navbar-brand" href="products/main.jsp"></a>
+            </form>
         </div>
-        <br/>
-        <input type="submit" class="btn btn-success col-md-6" value="<fmt:message bundle="${i18n}" key="login.submit"/>">
-    </form>
-    <form class="form-group" action="frontController?command=signup" method="post">
-        <fmt:setLocale value="${sessionScope.locale}"/>
-        <fmt:setBundle basename="messages" var="i18n"/>
-        <input type="submit" class="btn btn-primary col-md-6" value="<fmt:message bundle="${i18n}" key="login.signup"/>">
+        <div class="col-md-12">
+            <div class="col-md-4"></div>
+            <input type="submit" class="btn btn-success col-md-4" value="<fmt:message bundle="${i18n}" key="login.submit"/>">
+        </div>
+        <%--<input type="submit" class="btn btn-primary col-md-6" value="<fmt:message bundle="${i18n}" key="login.signup"/>">--%>
     </form>
 </div>

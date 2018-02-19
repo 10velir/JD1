@@ -18,7 +18,7 @@
                &lt;%&ndash; <form><input></form>&ndash;%&gt;
             </td>--%>
             <td>
-                  <form action="frontController?command=createOrder" method="post">  <%--<input type="submit" class="btn-success" name="submit" value="Арендовать"/>--%>
+                  <form action="frontController?command=createOrder" method="post">
             <td class="col-md-1"><input id="${order.id}" class="btn-primary addProductBtn" type="datetime-local"/></td>
             <td class="col-md-1"><input id="${order.id}" class="btn-primary addProductBtn" type="datetime-local"/></td>
                 <input type="hidden" value="true" name="paid"/>

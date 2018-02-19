@@ -16,6 +16,7 @@ public enum ControllerType {
     ORDERS("orders/main.jsp", "Orders", "orders.title", new OrderController()),
     ORDERS_FOR_ADMIN("orders/main.jsp", "Orders", "orders.title", new OrderController()),
     ADD_PRODUCTS_AJAX("", "addProduct", "", new AddToBasketController()),
+    SIGNUP("signup.jsp", "Signup", "login.submit", new SignupController()),
     PRODUCTS("products/main.jsp", "Products", "products.title", new ProductController()),
     CREATE_ORDER("orders/createOrder.jsp", "createOrder", "createOrder.title", new CreateOrderController());
     private String pagePath;

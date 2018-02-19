@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public interface Controller {
     String MAIN_PAGE ="/WEB-INF/view/layouts/default.jspx";
-    String LOGIN_PAGE="/WEB-INF/view/login.jsp";
+    String SIGNUP_PAGE="/WEB-INF/view/signup.jsp";
     String PRODUCT_PAGE="/WEB-INF/view/products/main.jsp";
 
     void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException;
