@@ -28,7 +28,7 @@ public class SignupController implements Controller {
         User user = new User();
         String contextPath = req.getContextPath();
         String page = "WEB-INF/view/signup.jsp";
-        if (login==null || password==null) {
+        if (login == null || password == null) {
             resp.setHeader("errorMsg", "Invalid Login or Password");
             RequestDispatcher dispatcher = req.getRequestDispatcher(page);
             dispatcher.forward(req, resp);
@@ -37,30 +37,18 @@ public class SignupController implements Controller {
             user.setName(name);
             user.setPassword(password);
             user.setLogin(login);
-            if(userService.getByLogin(login)==null) {
-
+            if (userService.getByLogin(login) == null) {
                 User persistUser = userService.createUser(user);
                 req.getSession().setAttribute("user", userService.getByLogin(persistUser.getLogin()));
                 resp.sendRedirect(contextPath + "/frontController?command=products");
                 return;
             }
-            User persistUser = userService.createUser(user);
-            req.getSession().setAttribute("user", userService.getByLogin(persistUser.getLogin()));
-            resp.sendRedirect(contextPath + "/frontController?command=products");
-            return;
-            /*resp.setHeader("errorMsg", "This login is already exist");
+            resp.setHeader("errorMsg", "This login is already exist");
             RequestDispatcher dispatcher = req.getRequestDispatcher(page);
             dispatcher.forward(req, resp);
-            return;*/
+            return;
 
         }
 
-
-
-        /*String contextPath = req.getContextPath();
-        resp.sendRedirect(contextPath+ "/frontController?command=createOrder");*/
-        /*RequestDispatcher dispatcher = req.getRequestDispatcher(SIGNUP_PAGE);
-        dispatcher.forward(req, resp);*/
     }
-
 }
