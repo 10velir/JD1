@@ -12,10 +12,19 @@ import lombok.*;
  */
 @Data
 @NoArgsConstructor
+
 public class Order {
     private long id;
     private long userId;
     private List<Item> items = new ArrayList<>();
     private double total;
     private boolean paid;
+
+    public Order(long id, long userId, List<Item> items, double total, boolean paid) {
+        this.id = id;
+        this.userId = userId;
+        this.items = items;
+        this.total = total;
+        this.paid = paid;
+    }
 }

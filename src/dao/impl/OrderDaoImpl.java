@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.OrderDao;
+import entities.Item;
 import entities.Order;
 
 /**
@@ -19,17 +20,24 @@ import entities.Order;
 public class OrderDaoImpl extends AbstractDao implements OrderDao {
     private static volatile OrderDao INSTANCE = null;
 
+    /*private long id;
+    private long userId;
+    private List<Item> items = new ArrayList<>();
+    private double total;
+    private boolean paid;*/
     private static final String saveQuery = "INSERT INTO `ORDER` (USER_ID, TOTAL, DATE, PAID) VALUES (?, ?, now(), ?)";
     private static final String updateQuery = "UPDATE `ORDER` SET TOTAL=? AND PAID=? WHERE ID=?";
     private static final String getQuery = "SELECT ID, USER_ID FROM `ORDER` WHERE ID=?";
     private static final String getAllByUserQuery = "SELECT ID, USER_ID FROM `ORDER` WHERE USER_ID = ? ORDER BY ID DESC";
     private static final String deleteQuery = "DELETE FROM `ORDER` WHERE ID=?";
+    private static final String getAllOrder = "SELECT ID, USER_ID, TOTAL, PAID FROM `ORDER` WHERE PAID=?";
 
     private PreparedStatement psSave;
     private PreparedStatement psUpdate;
     private PreparedStatement psGet;
     private PreparedStatement psGetAllByUserId;
     private PreparedStatement psDelete;
+    private PreparedStatement psGetAllOrder;
 
     @Override
     public Order save(Order order) throws SQLException {
@@ -88,6 +96,30 @@ public class OrderDaoImpl extends AbstractDao implements OrderDao {
             list.add(populateEntity(rs));
         }
         close(rs);
+
+        return list;
+    }
+    @Override
+    public List<Order> getAllOrder() throws SQLException {
+        psGetAllOrder = prepareStatement(getAllOrder);
+        psGetAllOrder.setBoolean(1,false);
+        psGetAllOrder.execute();
+        ResultSet resultSet = psGetAllOrder.getResultSet();
+        //ResultSet resultSet = psGetAllOrder.getResultSet();
+        List<Order> list = new ArrayList<>();
+        while (resultSet.next()) {
+            list.add(
+                    new Order(
+                    resultSet.getLong(1),
+                    resultSet.getLong(2),
+                            CarDaoImpl.getInstance().getByOrderId(resultSet.getLong(1)),
+                            resultSet.getDouble(3),
+                            resultSet.getBoolean(4)
+                            )
+            );
+            //list.add(populateEntity(resultSet));
+        }
+        close(resultSet);
 
         return list;
     }

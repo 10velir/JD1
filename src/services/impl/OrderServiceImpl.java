@@ -102,6 +102,21 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
         }
     }
 
+    @Override
+    public List<Order> getAllOrder() {
+
+        try {
+            startTransaction();
+            List<Order> orders = orderDao.getAllOrder();
+            commit();
+            return orders;
+        } catch (SQLException e) {
+            rollback();
+            throw new ServiceException("Error getting Orders");
+        }
+
+    }
+
     public void createOrder(long userId, long productId, int quantity, boolean paidStatus) {
         Order order = new Order();
         try {

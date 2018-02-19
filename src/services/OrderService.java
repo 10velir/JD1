@@ -17,6 +17,7 @@ public interface OrderService {
     Order get(Serializable id);
     void update(Order order);
     int delete(Serializable id);
+    List<Order> getAllOrder();
 
     List<Order> getByUserId(long userId);
 }

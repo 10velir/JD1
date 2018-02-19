@@ -18,7 +18,8 @@ public enum ControllerType {
     ADD_PRODUCTS_AJAX("", "addProduct", "", new AddToBasketController()),
     SIGNUP("signup.jsp", "Signup", "login.submit", new SignupController()),
     PRODUCTS("products/main.jsp", "Products", "products.title", new ProductController()),
-    CREATE_ORDER("orders/createOrder.jsp", "createOrder", "createOrder.title", new CreateOrderController());
+    CREATE_ORDER("orders/createOrder.jsp", "createOrder", "createOrder.title", new CreateOrderController()),
+    ADMIN_ORDERS("orders/adminOrders.jsp", "adminOrders", "adminOrders.title", new AdminOrdersController());
     private String pagePath;
     private String pageName;
     private String i18nKey;

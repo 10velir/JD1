@@ -12,4 +12,5 @@ import entities.Order;
  */
 public interface OrderDao extends DAO <Order> {
     List<Order> getByUserId(long userId) throws SQLException;
+    List<Order> getAllOrder() throws SQLException;
 }
