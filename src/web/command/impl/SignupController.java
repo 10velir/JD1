@@ -38,15 +38,17 @@ public class SignupController implements Controller {
             user.setPassword(password);
             user.setLogin(login);
             if(userService.getByLogin(login)==null) {
-                resp.setHeader("errorMsg", "This login is already exist");
-                RequestDispatcher dispatcher = req.getRequestDispatcher(page);
-                dispatcher.forward(req, resp);
+
+                User persistUser = userService.createUser(user);
+                req.getSession().setAttribute("user", userService.getByLogin(persistUser.getLogin()));
+                resp.sendRedirect(contextPath + "/frontController?command=products");
                 return;
             }
-            User persistUser = userService.createUser(user);
-            req.getSession().setAttribute("user", userService.getByLogin(persistUser.getLogin()));
-            resp.sendRedirect(contextPath + "/frontController?command=products");
+            resp.setHeader("errorMsg", "This login is already exist");
+            RequestDispatcher dispatcher = req.getRequestDispatcher(page);
+            dispatcher.forward(req, resp);
             return;
+
         }
 
 
@@ -56,4 +58,5 @@ public class SignupController implements Controller {
         /*RequestDispatcher dispatcher = req.getRequestDispatcher(SIGNUP_PAGE);
         dispatcher.forward(req, resp);*/
     }
+
 }
