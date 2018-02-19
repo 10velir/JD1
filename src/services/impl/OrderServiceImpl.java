@@ -55,7 +55,10 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
     @Override
     public Order get(Serializable id) {
         try {
-            return orderDao.get(id);
+            startTransaction();
+            Order order = orderDao.get(id);
+            commit();
+            return order;
         } catch (SQLException e) {
             throw new ServiceException("Error getting Order by id" + id);
         }
@@ -64,8 +67,11 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
     @Override
     public void update(Order order) {
         try {
+            startTransaction();
             orderDao.update(order);
+            commit();
         } catch (SQLException e) {
+            rollback();
             throw new ServiceException("Error updating Order " + order);
         }
     }
@@ -73,18 +79,24 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
     @Override
     public void update(boolean paidStatus, Serializable id) {
         try {
+            startTransaction();
             orderDao.update(paidStatus, id);
+            commit();
         } catch (SQLException e) {
-            throw new ServiceException("smth wrong");
+            rollback();
+            throw new ServiceException("smth wrong "+e);
         }
     }
 
     @Override
-    public int delete(Serializable id) {
+    public void delete(Serializable id) {
         try {
-            return orderDao.delete(id);
+            startTransaction();
+            orderDao.delete(id);
+            commit();
         } catch (SQLException e) {
-            throw new ServiceException("Error deleting Order by id" + id);
+            rollback();
+            throw new ServiceException("Error deleting Order by id" + id +" "+ e);
         }
     }
 

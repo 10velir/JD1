@@ -31,14 +31,17 @@ public class    CreateOrderController implements Controller {
         if ((req.getParameter("productId") != null)) {
             productId = Long.parseLong(req.getParameter("productId"));
             order = orderService.createOrder(user.getId(), productId, 0);
-        } else{
+        } /*else{
+
+            orderService.get(Long.parseLong(req.getParameter("orderId")));
             Optional<Order> first = orderService.getByUserId(user.getId())
                     .stream()
                     .filter(order1 -> order1.getId() == Long.parseLong(req.getParameter("orderId")))
                     .findFirst();
-            order=null;
+
+            order=first.get();
             req.getParameter("order");//orderService.get(Long.parseLong(req.getParameter("orderId")));
-        }
+        }*/
 
         List<Order> orders = orderService.getByUserId(user.getId());
 
@@ -46,7 +49,7 @@ public class    CreateOrderController implements Controller {
 
         if (!(req.getParameter("paid") == null || req.getParameter("paid").isEmpty())) {
             req.getSession().setAttribute("user", user);
-            orderService.update(true, user.getId());
+            orderService.update(true, Long.parseLong(req.getParameter("orderId")));
             String contextPath = req.getContextPath();
             resp.sendRedirect(contextPath + "/frontController?command=createOrder");
             return;
@@ -55,4 +58,5 @@ public class    CreateOrderController implements Controller {
         RequestDispatcher dispatcher = req.getRequestDispatcher(MAIN_PAGE);
         dispatcher.forward(req, resp);
     }
+
 }
